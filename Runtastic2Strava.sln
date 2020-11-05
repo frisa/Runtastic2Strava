@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runtastic2Strava", "Runtastic2Strava\Runtastic2Strava.csproj", "{C96A61EE-B218-47E9-956A-613282B7F40F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Strava.NET", "strava-net\Strava.NET.csproj", "{B1B796EC-6079-40E0-AD83-271FB03AD1A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{C96A61EE-B218-47E9-956A-613282B7F40F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C96A61EE-B218-47E9-956A-613282B7F40F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C96A61EE-B218-47E9-956A-613282B7F40F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1B796EC-6079-40E0-AD83-271FB03AD1A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1B796EC-6079-40E0-AD83-271FB03AD1A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1B796EC-6079-40E0-AD83-271FB03AD1A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1B796EC-6079-40E0-AD83-271FB03AD1A2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
