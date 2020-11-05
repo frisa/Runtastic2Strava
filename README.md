@@ -1,0 +1,1 @@
+# Runtastic2Strava
