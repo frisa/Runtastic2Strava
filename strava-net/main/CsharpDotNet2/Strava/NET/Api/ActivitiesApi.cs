@@ -170,27 +170,37 @@ namespace Strava.NET.Api
             String postBody = null;
     
                                     if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
-if (type != null) formParams.Add("type", ApiClient.ParameterToString(type)); // form parameter
-if (startDateLocal != null) formParams.Add("start_date_local", ApiClient.ParameterToString(startDateLocal)); // form parameter
-if (elapsedTime != null) formParams.Add("elapsed_time", ApiClient.ParameterToString(elapsedTime)); // form parameter
-if (description != null) formParams.Add("description", ApiClient.ParameterToString(description)); // form parameter
-if (distance != null) formParams.Add("distance", ApiClient.ParameterToString(distance)); // form parameter
-if (trainer != null) formParams.Add("trainer", ApiClient.ParameterToString(trainer)); // form parameter
-if (photoIds != null) formParams.Add("photo_ids", ApiClient.ParameterToString(photoIds)); // form parameter
-if (commute != null) formParams.Add("commute", ApiClient.ParameterToString(commute)); // form parameter
+            if (type != null) formParams.Add("type", ApiClient.ParameterToString(type)); // form parameter
+            if (startDateLocal != null) formParams.Add("start_date_local", ApiClient.ParameterToString(startDateLocal)); // form parameter
+            if (elapsedTime != null) formParams.Add("elapsed_time", ApiClient.ParameterToString(elapsedTime)); // form parameter
+            if (description != null) formParams.Add("description", ApiClient.ParameterToString(description)); // form parameter
+            if (distance != null) formParams.Add("distance", ApiClient.ParameterToString(distance)); // form parameter
+            if (trainer != null) formParams.Add("trainer", ApiClient.ParameterToString(trainer)); // form parameter
+            if (photoIds != null) formParams.Add("photo_ids", ApiClient.ParameterToString(photoIds)); // form parameter
+            if (commute != null) formParams.Add("commute", ApiClient.ParameterToString(commute)); // form parameter
                 
             // authentication setting, if any
             String[] authSettings = new String[] { "strava_oauth" };
     
             // make the HTTP request
             IRestResponse response = (IRestResponse) ApiClient.CallApi(path, Method.POST, queryParams, postBody, headerParams, formParams, fileParams, authSettings);
-    
-            if (((int)response.StatusCode) >= 400)
-                throw new ApiException ((int)response.StatusCode, "Error calling CreateActivity: " + response.Content, response.Content);
+
+            if (((int)response.StatusCode) >= (int)System.Net.HttpStatusCode.BadRequest)
+            {
+                throw new ApiException((int)response.StatusCode, "Error calling CreateActivity: " + response.Content, response.Content);
+            }
             else if (((int)response.StatusCode) == 0)
-                throw new ApiException ((int)response.StatusCode, "Error calling CreateActivity: " + response.ErrorMessage, response.ErrorMessage);
-    
-            return (DetailedActivity) ApiClient.Deserialize(response.Content, typeof(DetailedActivity), response.Headers);
+            {
+                throw new ApiException((int)response.StatusCode, "Error calling CreateActivity: " + response.ErrorMessage, response.ErrorMessage);
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.Created)
+            {
+                return (DetailedActivity)ApiClient.Deserialize(response.Content, typeof(DetailedActivity), response.Headers);
+            }
+            else
+            {
+                return new DetailedActivity();
+            }
         }
     
         /// <summary>
