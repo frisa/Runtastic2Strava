@@ -50,29 +50,32 @@ namespace Runtastic2Strava
 		private void btnImport_Click(object sender, EventArgs e)
 		{
 			_token = CStravaImporter.RenewToken();
+			if (Configuration.ApiKey.ContainsKey("access_token"))
+			{
+				Configuration.ApiKey.Remove("access_token");
+			}
 			Configuration.ApiKey.Add("access_token", _token.access_token);
+
+			if (Configuration.ApiKey.ContainsKey("refresh_token"))
+			{
+				Configuration.ApiKey.Remove("refresh_token");
+			}
 			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
 
 			ActivitiesApi apiInstance = new ActivitiesApi();
 			try
 			{
-				//foreach (DataRow rActivity in _dtRuntasticActivities.Rows)
-				//{
-				//int i = 0;
-				//DataRow rActivity = _dtRuntasticActivities.Rows[0];
-				//String createdAt = rActivity["created_at"].ToString();
-
 				foreach (RuntasticActivity ac in _blRuntasticActivities)
 				{
 					DetailedActivity result = apiInstance.CreateActivity(
-																			"Running",
-																			"Run",
-																			ac.created_at.ToString("o"),
-																			ac.duration,
+																			"Running08",
+																			"Ride",
+																			ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ"),
+																			(int)(ac.duration / 1000),
 																			"Imported from Runtastic",
 																			ac.distance,
 																			56,
-																			"", // string | List of native photo ids to attach to the activity. (optional) 
+																			"", 
 																			56
 																		) ;
 					break;
