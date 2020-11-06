@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -61,13 +61,13 @@ namespace Runtastic2Strava
 		private void btnImport_Click(object sender, EventArgs e)
 		{
 			StravaToken _token = CStravaImporter.RenewToken();
-			Configuration.ApiKey.Add("access_token", "1673f57e5ae557ad251c0e559e4afab3ab106c74");
-			Configuration.ApiKey.Add("refresh_token", "ed9d3d6c85b3806a03bfb75e5b9bc41ee6edddfb");
+			Configuration.ApiKey.Add("access_token", _token.access_token);
+			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
 
 			ActivitiesApi apiInstance = new ActivitiesApi();
-			var name = "Running";  // string | The name of the activity.
+			var name = "Running3";  // string | The name of the activity.
 			var type = "Run";  // string | Type of activity. For example - Run, Ride etc.
-			var startDateLocal = "2020-11-06T00:05:19Z";  // string | ISO 8601 formatted date time.
+			var startDateLocal = "2020-11-06T00:15:19Z";  // string | ISO 8601 formatted date time.
 			var elapsedTime = 56;  // int? | In seconds.
 			var description = "Toto je popisek";  // string | Description of the activity. (optional) 
 			float distance = 3.4F;  // float? | In meters. (optional)
@@ -77,8 +77,11 @@ namespace Runtastic2Strava
 
 			try
 			{
-				// Create an Activity
+				//foreach (DataRow rActivity in _dtRuntasticActivities.Rows)
+				//{
+				DataRow rActivity = _dtRuntasticActivities.Rows[0];
 				DetailedActivity result = apiInstance.CreateActivity(name, type, startDateLocal, elapsedTime, description, distance, trainer, photoIds, commute);
+				//}
 			}
 			catch (Exception except)
 			{
