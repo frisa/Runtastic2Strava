@@ -11,12 +11,31 @@ using System.IO;
 using Strava.NET.Client;
 using Strava.NET.Model;
 using Strava.NET.Api;
+using Newtonsoft.Json;
 
 namespace Runtastic2Strava
 {
+	public class EpochDateTimeConverter : Newtonsoft.Json.JsonConverter
+	{
+		public override bool CanConvert(Type objectType)
+		{
+			return objectType == typeof(DateTime);
+		}
+
+		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+		{
+			var t = long.Parse(reader.Value.ToString());
+			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(t);
+		}
+
+		public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			throw new NotImplementedException();
+		}
+	}
 	public partial class MainForm : Form
 	{
-		private DataTable _dtRuntasticActivities = new DataTable();
+		private BindingList<RuntasticActivity> _blRuntasticActivities = new BindingList<RuntasticActivity>();
 		private StravaToken _token;
 		public MainForm()
 		{
@@ -24,29 +43,27 @@ namespace Runtastic2Strava
 			
 		}
 
+		private static readonly DateTime epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+
+		public static DateTime FromUnixTime(long unixTime)
+		{
+			return epoch.AddSeconds(unixTime);
+		}
+
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
 			String sPathSportSessions = tbPath.Text + "Sport-sessions";
 			string[] fileEntries = Directory.GetFiles(sPathSportSessions);
 			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(RuntasticActivity));
-			_dtRuntasticActivities = new DataTable();
-			for (int i = 0; i < props.Count; i++)
-			{
-				PropertyDescriptor prop = props[i];
-				_dtRuntasticActivities.Columns.Add(prop.Name, prop.PropertyType);
-			}
+			_blRuntasticActivities = new BindingList<RuntasticActivity>();
+
 			foreach (string fileName in fileEntries)
 			{
 				String jsonString = System.IO.File.ReadAllText(fileName);
-				RuntasticActivity Activity = Newtonsoft.Json.JsonConvert.DeserializeObject<RuntasticActivity>(jsonString);
-				object[] values = new object[props.Count];
-				for (int i = 0; i < values.Length; i++)
-				{
-					values[i] = props[i].GetValue(Activity);
-				}
-				_dtRuntasticActivities.Rows.Add(values);
+				RuntasticActivity Activity = Newtonsoft.Json.JsonConvert.DeserializeObject<RuntasticActivity>(jsonString, new EpochDateTimeConverter());
+				_blRuntasticActivities.Add(Activity);
 			}
-			dgvImport.DataSource = _dtRuntasticActivities;
+			dgvImport.DataSource = _blRuntasticActivities;
 		}
 
 		private void btnBrowse_Click(object sender, EventArgs e)
@@ -60,27 +77,30 @@ namespace Runtastic2Strava
 
 		private void btnImport_Click(object sender, EventArgs e)
 		{
-			StravaToken _token = CStravaImporter.RenewToken();
+			_token = CStravaImporter.RenewToken();
 			Configuration.ApiKey.Add("access_token", _token.access_token);
 			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
 
 			ActivitiesApi apiInstance = new ActivitiesApi();
-			var name = "Running3";  // string | The name of the activity.
-			var type = "Run";  // string | Type of activity. For example - Run, Ride etc.
-			var startDateLocal = "2020-11-06T00:15:19Z";  // string | ISO 8601 formatted date time.
-			var elapsedTime = 56;  // int? | In seconds.
-			var description = "Toto je popisek";  // string | Description of the activity. (optional) 
-			float distance = 3.4F;  // float? | In meters. (optional)
-			var trainer = 56;  // int? | Set to 1 to mark as a trainer activity. (optional) 
-			var photoIds = "";  // string | List of native photo ids to attach to the activity. (optional) 
-			var commute = 56;  // int? | Set to 1 to mark as commute. (optional) 
-
 			try
 			{
 				//foreach (DataRow rActivity in _dtRuntasticActivities.Rows)
 				//{
-				DataRow rActivity = _dtRuntasticActivities.Rows[0];
-				DetailedActivity result = apiInstance.CreateActivity(name, type, startDateLocal, elapsedTime, description, distance, trainer, photoIds, commute);
+				//int i = 0;
+				//DataRow rActivity = _dtRuntasticActivities.Rows[0];
+				//String createdAt = rActivity["created_at"].ToString();
+
+
+				//DetailedActivity result = apiInstance.CreateActivity(
+				//	"Running" + i++ ,
+				//	"Run",
+				//	createdAt ,
+				//	Int32.Parse(rActivity["duration"].ToString()), 
+				//	"Imported from Runtastic",
+				//	Int32.Parse(rActivity["distance"].ToString()),
+				//	56, 
+				//	"", // string | List of native photo ids to attach to the activity. (optional) 
+				//	56);
 				//}
 			}
 			catch (Exception except)

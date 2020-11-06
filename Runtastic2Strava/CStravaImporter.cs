@@ -20,35 +20,35 @@ namespace Runtastic2Strava
     }
     public class RuntasticActivity
     {
-        public string start_time { get; set; }
-        public string end_time { get; set; }
-        public string created_at { get; set; }
-        public string updated_at { get; set; }
-        public string start_time_timezone_offset { get; set; }
-        public string end_time_timezone_offset { get; set; }
-        public string distance { get; set; }
-        public string duration { get; set; }
-        public string elevation_gain { get; set; }
-        public string elevation_loss { get; set; }
-        public string average_speed { get; set; }
-        public string calories { get; set; }
-        public string longitude { get; set; }
-        public string latitude { get; set; }
-        public string max_speed { get; set; }
-        public string pause_duration { get; set; }
-        public string duration_per_km { get; set; }
-        public string temperature { get; set; }
-        public string pulse_avg { get; set; }
-        public string pulse_max { get; set; }
-        public string avg_cadence { get; set; }
-        public string max_cadence { get; set; }
-        public string manual { get; set; }
-        public string edited { get; set; }
-        public string completed { get; set; }
-        public string live_tracking_active { get; set; }
-        public string live_tracking_enabled { get; set; }
-        public string cheering_enabled { get; set; }
-        public string indoor { get; set; }
+        public DateTime start_time { get; set; }
+        public DateTime end_time { get; set; }
+        public DateTime created_at { get; set; }
+        public DateTime updated_at { get; set; }
+        public int start_time_timezone_offset { get; set; }
+        public int end_time_timezone_offset { get; set; }
+        public int distance { get; set; }
+        public int duration { get; set; }
+        public int elevation_gain { get; set; }
+        public int elevation_loss { get; set; }
+        public float average_speed { get; set; }
+        public int calories { get; set; }
+        public float longitude { get; set; }
+        public float latitude { get; set; }
+        public float max_speed { get; set; }
+        public int pause_duration { get; set; }
+        public int duration_per_km { get; set; }
+        public float temperature { get; set; }
+        public int pulse_avg { get; set; }
+        public int pulse_max { get; set; }
+        public int avg_cadence { get; set; }
+        public int max_cadence { get; set; }
+        public bool manual { get; set; }
+        public bool edited { get; set; }
+        public bool completed { get; set; }
+        public bool live_tracking_active { get; set; }
+        public bool live_tracking_enabled { get; set; }
+        public bool cheering_enabled { get; set; }
+        public bool indoor { get; set; }
         public string id { get; set; }
         public string weather_condition_id { get; set; }
         public string surface_id { get; set; }
