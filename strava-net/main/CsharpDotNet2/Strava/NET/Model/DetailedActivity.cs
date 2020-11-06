@@ -104,7 +104,7 @@ namespace Strava.NET.Model {
     /// </summary>
     [DataMember(Name="type", EmitDefaultValue=false)]
     [JsonProperty(PropertyName = "type")]
-    public ActivityType Type { get; set; }
+    public String Type { get; set; }
 
     /// <summary>
     /// The time at which the activity was started.
