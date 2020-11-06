@@ -11,6 +11,8 @@ using System.IO;
 using Strava.NET.Client;
 using Strava.NET.Model;
 using Strava.NET.Api;
+
+
 using Newtonsoft.Json;
 
 namespace Runtastic2Strava
@@ -72,23 +74,27 @@ namespace Runtastic2Strava
 				DetailedActivity resultActivity;
 				try
 				{
-					var name = "Running " + index++;  // String | The name of the activity.
-					var type = "Run";  // String | Type of activity. For example - Run, Ride etc.
-					var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");  // Date | ISO 8601 formatted date time.
-					var elapsedTime = (int)(ac.duration / 1000);  // Integer | In seconds.
-					var description = "Imported from Runtastic";  // String | Description of the activity. (optional) 
-					var distance = ac.distance;  // Float | In meters. (optional) 
-					var trainer = 0;  // Integer | Set to 1 to mark as a trainer activity. (optional)
-					var photoIds = "";
-					var commute = 0;  // Integer | Set to 1 to mark as commute. (optional) 
-					resultActivity = apiActivities.CreateActivity(name, type, startDateLocal,elapsedTime,description,distance,trainer,photoIds,commute);
-
+					//var name = "Running " + index++;  // String | The name of the activity.
+					//var type = "Run";  // String | Type of activity. For example - Run, Ride etc.
+					//var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");  // Date | ISO 8601 formatted date time.
+					//var elapsedTime = (int)(ac.duration / 1000);  // Integer | In seconds.
+					//var description = "Imported from Runtastic";  // String | Description of the activity. (optional) 
+					//var distance = ac.distance;  // Float | In meters. (optional) 
+					//var trainer = 0;  // Integer | Set to 1 to mark as a trainer activity. (optional)
+					//var photoIds = "";
+					//var commute = 0;  // Integer | Set to 1 to mark as commute. (optional) 
+					//resultActivity = apiActivities.CreateActivity(name, type, startDateLocal,elapsedTime,
+					//	description,distance,trainer,photoIds,commute);
+					Upload poolingUpdate;
 					var apiInstance = new UploadsApi();
-					var file = File.OpenRead( @"d:\Repositories\export-20201030-000\Sport-sessions\GPS-data\2019-08-07_18-07-50-UTC_53c70667-15d7-4f54-9f9f-4ae6b8f14e66.gpx"); // File | The uploaded file. (optional) 
-					var dataType = "GPX";  // String | The format of the uploaded file. (optional) 
-					var externalId = "";  // String | The desired external identifier of the resulting activity. (optional) 
-					resultUpload = apiUpload.CreateUpload(file,name,description,"0","0",dataType,externalId);
-
+					var file = File.OpenRead(@"d:\test2.gpx"); // File | The uploaded file. (optional) 
+					resultUpload = apiUpload.CreateUpload(file, null, null, null, null, "gpx", null);
+					do
+					{
+						System.Threading.Thread.Sleep(1000);
+						poolingUpdate = apiUpload.GetUploadById(resultUpload.Id);
+					}
+					while (poolingUpdate.ActivityId == null);
 				}
 				catch (Exception except)
 				{

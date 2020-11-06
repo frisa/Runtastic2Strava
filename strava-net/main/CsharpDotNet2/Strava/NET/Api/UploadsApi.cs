@@ -108,13 +108,13 @@ namespace Strava.NET.Api
             var fileParams = new Dictionary<String, FileParameter>();
             String postBody = null;
     
-                                    if (file != null) fileParams.Add("file", ApiClient.ParameterToFile("file", file));
-if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
-if (description != null) formParams.Add("description", ApiClient.ParameterToString(description)); // form parameter
-if (trainer != null) formParams.Add("trainer", ApiClient.ParameterToString(trainer)); // form parameter
-if (commute != null) formParams.Add("commute", ApiClient.ParameterToString(commute)); // form parameter
-if (dataType != null) formParams.Add("data_type", ApiClient.ParameterToString(dataType)); // form parameter
-if (externalId != null) formParams.Add("external_id", ApiClient.ParameterToString(externalId)); // form parameter
+            if (file != null) fileParams.Add("file", ApiClient.ParameterToFile("file", file));
+            if (name != null) formParams.Add("name", ApiClient.ParameterToString(name)); // form parameter
+            if (description != null) formParams.Add("description", ApiClient.ParameterToString(description)); // form parameter
+            if (trainer != null) formParams.Add("trainer", ApiClient.ParameterToString(trainer)); // form parameter
+            if (commute != null) formParams.Add("commute", ApiClient.ParameterToString(commute)); // form parameter
+            if (dataType != null) formParams.Add("data_type", ApiClient.ParameterToString(dataType)); // form parameter
+            if (externalId != null) formParams.Add("external_id", ApiClient.ParameterToString(externalId)); // form parameter
                 
             // authentication setting, if any
             String[] authSettings = new String[] { "strava_oauth" };
