@@ -42,7 +42,7 @@
 			// btnLoad
 			// 
 			this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnLoad.Location = new System.Drawing.Point(563, 3);
+			this.btnLoad.Location = new System.Drawing.Point(1083, 3);
 			this.btnLoad.Name = "btnLoad";
 			this.btnLoad.Size = new System.Drawing.Size(114, 32);
 			this.btnLoad.TabIndex = 0;
@@ -70,7 +70,7 @@
 			this.tableLayoutPanel1.RowCount = 2;
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(1320, 946);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// label1
@@ -87,14 +87,14 @@
 			this.tbPath.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tbPath.Location = new System.Drawing.Point(182, 3);
 			this.tbPath.Name = "tbPath";
-			this.tbPath.Size = new System.Drawing.Size(255, 26);
+			this.tbPath.Size = new System.Drawing.Size(775, 26);
 			this.tbPath.TabIndex = 2;
 			this.tbPath.Text = "d:\\Repositories\\export-20201030-000\\";
 			// 
 			// btnBrowse
 			// 
 			this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnBrowse.Location = new System.Drawing.Point(443, 3);
+			this.btnBrowse.Location = new System.Drawing.Point(963, 3);
 			this.btnBrowse.Name = "btnBrowse";
 			this.btnBrowse.Size = new System.Drawing.Size(114, 32);
 			this.btnBrowse.TabIndex = 3;
@@ -115,13 +115,13 @@
 			this.dgvImport.RowHeadersWidth = 62;
 			this.dgvImport.RowTemplate.Height = 28;
 			this.dgvImport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvImport.Size = new System.Drawing.Size(674, 406);
+			this.dgvImport.Size = new System.Drawing.Size(1194, 902);
 			this.dgvImport.TabIndex = 4;
 			// 
 			// btnImport
 			// 
 			this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnImport.Location = new System.Drawing.Point(683, 3);
+			this.btnImport.Location = new System.Drawing.Point(1203, 3);
 			this.btnImport.Name = "btnImport";
 			this.btnImport.Size = new System.Drawing.Size(114, 32);
 			this.btnImport.TabIndex = 5;
@@ -133,7 +133,7 @@
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(800, 450);
+			this.ClientSize = new System.Drawing.Size(1320, 946);
 			this.Controls.Add(this.tableLayoutPanel1);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
