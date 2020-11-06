@@ -67,44 +67,48 @@ namespace Runtastic2Strava
 			ActivitiesApi apiActivities = new ActivitiesApi();
 			var apiUpload = new UploadsApi();
 
-			int index = 0;
-			foreach (RuntasticActivity ac in _blRuntasticActivities)
+			foreach (string fileName in Directory.GetFiles(tbPath.Text + "Sport-sessions\\GPS-data2\\"))
 			{
 				Upload resultUpload;
-				DetailedActivity resultActivity;
-				try
+				Upload poolingUpdate;
+				var apiInstance = new UploadsApi();
+				var file = File.OpenRead(fileName);
+				resultUpload = apiUpload.CreateUpload(file, null, null, null, null, "gpx", null);
+				do
 				{
-					//var name = "Running " + index++;  // String | The name of the activity.
-					//var type = "Run";  // String | Type of activity. For example - Run, Ride etc.
-					//var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");  // Date | ISO 8601 formatted date time.
-					//var elapsedTime = (int)(ac.duration / 1000);  // Integer | In seconds.
-					//var description = "Imported from Runtastic";  // String | Description of the activity. (optional) 
-					//var distance = ac.distance;  // Float | In meters. (optional) 
-					//var trainer = 0;  // Integer | Set to 1 to mark as a trainer activity. (optional)
-					//var photoIds = "";
-					//var commute = 0;  // Integer | Set to 1 to mark as commute. (optional) 
-					//resultActivity = apiActivities.CreateActivity(name, type, startDateLocal,elapsedTime,
-					//	description,distance,trainer,photoIds,commute);
-					Upload poolingUpdate;
-					var apiInstance = new UploadsApi();
-					var file = File.OpenRead(@"d:\test2.gpx"); // File | The uploaded file. (optional) 
-					resultUpload = apiUpload.CreateUpload(file, null, null, null, null, "gpx", null);
-					do
-					{
-						System.Threading.Thread.Sleep(1000);
-						poolingUpdate = apiUpload.GetUploadById(resultUpload.Id);
-					}
-					while (poolingUpdate.ActivityId == null);
+					System.Threading.Thread.Sleep(1000);
+					poolingUpdate = apiUpload.GetUploadById(resultUpload.Id);
 				}
-				catch (Exception except)
-				{
-					MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				}
-				if (index == 3)
-				{
-					break;
-				}
+				while (poolingUpdate.ActivityId == null);
+
 			}
+
+			//foreach (RuntasticActivity ac in _blRuntasticActivities)
+			//{
+			//	try
+			//	{
+			//		//var name = "Running " + index++;  // String | The name of the activity.
+			//		//var type = "Run";  // String | Type of activity. For example - Run, Ride etc.
+			//		//var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");  // Date | ISO 8601 formatted date time.
+			//		//var elapsedTime = (int)(ac.duration / 1000);  // Integer | In seconds.
+			//		//var description = "Imported from Runtastic";  // String | Description of the activity. (optional) 
+			//		//var distance = ac.distance;  // Float | In meters. (optional) 
+			//		//var trainer = 0;  // Integer | Set to 1 to mark as a trainer activity. (optional)
+			//		//var photoIds = "";
+			//		//var commute = 0;  // Integer | Set to 1 to mark as commute. (optional) 
+			//		//resultActivity = apiActivities.CreateActivity(name, type, startDateLocal,elapsedTime,
+			//		//	description,distance,trainer,photoIds,commute);
+
+			//	}
+			//	catch (Exception except)
+			//	{
+			//		MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			//	}
+			//	if (index == 3)
+			//	{
+			//		break;
+			//	}
+			//}
 		}
 	}
 }
