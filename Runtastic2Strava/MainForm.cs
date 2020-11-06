@@ -63,30 +63,33 @@ namespace Runtastic2Strava
 			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
 
 			ActivitiesApi apiInstance = new ActivitiesApi();
-			try
-			{
+
+				int index = 0;
 				foreach (RuntasticActivity ac in _blRuntasticActivities)
 				{
-					DetailedActivity result = apiInstance.CreateActivity(
-																			"Running08",
-																			"Ride",
-																			ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ"),
-																			(int)(ac.duration / 1000),
-																			"Imported from Runtastic",
-																			ac.distance,
-																			56,
-																			"", 
-																			56
-																		) ;
-					break;
+					try
+					{
+						DetailedActivity result = apiInstance.CreateActivity(
+																				"Running " + index++,
+																				"Run",
+																				ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ"),
+																				(int)(ac.duration / 1000),
+																				"Imported from Runtastic",
+																				ac.distance,
+																				56,
+																				"", 
+																				56
+																			) ;
+					}
+					catch (Exception except)
+					{
+						MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+					if (index == 3)
+					{
+						break;
+					}
 				}
-
-
-			}
-			catch (Exception except)
-			{
-				MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			}
 		}
 	}
 }
