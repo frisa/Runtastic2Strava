@@ -33,7 +33,7 @@ namespace Runtastic2Strava
 			String sPathGPPSData = tbPath.Text + "Sport-sessions\\GPS-data";
 
 			string[] fileEntries = Directory.GetFiles(sPathSportSessions);
-			string[] fileEntriesGpx = Directory.GetFiles(sPathSportSessions);
+			string[] fileEntriesGpx = Directory.GetFiles(sPathGPPSData);
 
 			_blRuntasticActivities = new BindingList<RuntasticActivity>();
 			_dtGpxList = new DataTable();
@@ -79,50 +79,71 @@ namespace Runtastic2Strava
 			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
 
 			ActivitiesApi apiActivities = new ActivitiesApi();
-			var apiUpload = new UploadsApi();
-
-			foreach (string fileName in Directory.GetFiles(tbPath.Text + "Sport-sessions\\GPS-data2\\"))
+			int index = 0;
+			foreach (RuntasticActivity ac in _blRuntasticActivities)
 			{
-				Upload resultUpload;
-				Upload poolingUpdate;
-				var apiInstance = new UploadsApi();
-				var file = File.OpenRead(fileName);
-				resultUpload = apiUpload.CreateUpload(file, null, null, null, null, "gpx", null);
-				do
+				try
 				{
-					System.Threading.Thread.Sleep(1000);
-					poolingUpdate = apiUpload.GetUploadById(resultUpload.Id);
+					DetailedActivity resultActivity;
+					var name = "Activity " + index++;
+					var type = "Run";
+					var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");
+					var elapsedTime = (int)(ac.duration / 1000);
+					var distance = ac.distance;
+					var photoIds = "";
+					resultActivity = apiActivities.CreateActivity(name, type, startDateLocal, elapsedTime,
+						null, distance, null, photoIds, null);
 				}
-				while (poolingUpdate.ActivityId == null);
-
+				catch (Exception except)
+				{
+					MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				break;
 			}
+			MessageBox.Show("Import done", "Strava Import", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
-			//foreach (RuntasticActivity ac in _blRuntasticActivities)
-			//{
-			//	try
-			//	{
-			//		//var name = "Running " + index++;  // String | The name of the activity.
-			//		//var type = "Run";  // String | Type of activity. For example - Run, Ride etc.
-			//		//var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");  // Date | ISO 8601 formatted date time.
-			//		//var elapsedTime = (int)(ac.duration / 1000);  // Integer | In seconds.
-			//		//var description = "Imported from Runtastic";  // String | Description of the activity. (optional) 
-			//		//var distance = ac.distance;  // Float | In meters. (optional) 
-			//		//var trainer = 0;  // Integer | Set to 1 to mark as a trainer activity. (optional)
-			//		//var photoIds = "";
-			//		//var commute = 0;  // Integer | Set to 1 to mark as commute. (optional) 
-			//		//resultActivity = apiActivities.CreateActivity(name, type, startDateLocal,elapsedTime,
-			//		//	description,distance,trainer,photoIds,commute);
+		private void btnGpxImport_Click(object sender, EventArgs e)
+		{
+			_token = CStravaImporter.RenewToken();
+			if (Configuration.ApiKey.ContainsKey("access_token"))
+			{
+				Configuration.ApiKey.Remove("access_token");
+			}
+			Configuration.ApiKey.Add("access_token", _token.access_token);
 
-			//	}
-			//	catch (Exception except)
-			//	{
-			//		MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			//	}
-			//	if (index == 3)
-			//	{
-			//		break;
-			//	}
-			//}
+			if (Configuration.ApiKey.ContainsKey("refresh_token"))
+			{
+				Configuration.ApiKey.Remove("refresh_token");
+			}
+			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
+
+			var apiUpload = new UploadsApi();
+			foreach (DataRow rowFile in _dtGpxList.Rows)
+			{
+				try
+				{
+					Upload resultUpload;
+					Upload poolingUpdate;
+					var apiInstance = new UploadsApi();
+					var file = File.OpenRead(rowFile["File Path"].ToString());
+					resultUpload = apiUpload.CreateUpload(file, null, null, null, null, "gpx", null);
+					int index = 0;
+					do
+					{
+						System.Threading.Thread.Sleep(1000);
+						poolingUpdate = apiUpload.GetUploadById(resultUpload.Id);
+						if (20 < index++) break;
+					}
+					while (poolingUpdate.ActivityId == null);
+				}
+				catch (Exception except)
+				{
+					MessageBox.Show(except.Message, "Strava GPX Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+				break;
+			}
+			MessageBox.Show("Import done", "Strava GPX Import", MessageBoxButtons.OK, MessageBoxIcon.Information);
 		}
 	}
 }

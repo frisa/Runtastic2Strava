@@ -171,6 +171,7 @@
 			this.btnGpxImport.TabIndex = 6;
 			this.btnGpxImport.Text = "Import GPX";
 			this.btnGpxImport.UseVisualStyleBackColor = true;
+			this.btnGpxImport.Click += new System.EventHandler(this.btnGpxImport_Click);
 			// 
 			// dgvGpx
 			// 
