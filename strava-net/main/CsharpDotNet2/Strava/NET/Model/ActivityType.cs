@@ -21,7 +21,8 @@ namespace Strava.NET.Model {
       var sb = new StringBuilder();
       sb.Append("class ActivityType {\n");
       sb.Append("}\n");
-      return sb.ToString();
+            //return sb.ToString();
+            return "Run";
     }
 
     /// <summary>
