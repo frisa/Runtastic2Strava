@@ -20,6 +20,7 @@ namespace Runtastic2Strava
 	public partial class MainForm : Form
 	{
 		private BindingList<RuntasticActivity> _blRuntasticActivities = new BindingList<RuntasticActivity>();
+		private DataTable _dtGpxList = new DataTable();
 		private StravaToken _token;
 		public MainForm()
 		{
@@ -29,9 +30,13 @@ namespace Runtastic2Strava
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
 			String sPathSportSessions = tbPath.Text + "Sport-sessions";
+			String sPathGPPSData = tbPath.Text + "Sport-sessions\\GPS-data";
+
 			string[] fileEntries = Directory.GetFiles(sPathSportSessions);
-			PropertyDescriptorCollection props = TypeDescriptor.GetProperties(typeof(RuntasticActivity));
+			string[] fileEntriesGpx = Directory.GetFiles(sPathSportSessions);
+
 			_blRuntasticActivities = new BindingList<RuntasticActivity>();
+			_dtGpxList = new DataTable();
 
 			foreach (string fileName in fileEntries)
 			{
@@ -40,6 +45,15 @@ namespace Runtastic2Strava
 				_blRuntasticActivities.Add(Activity);
 			}
 			dgvImport.DataSource = _blRuntasticActivities;
+
+			_dtGpxList.Columns.Add("File Path");
+			foreach (string fileName in fileEntriesGpx)
+			{
+				DataRow rowNew = _dtGpxList.NewRow();
+				rowNew["File Path"] = fileName;
+				_dtGpxList.Rows.Add(rowNew);
+			}
+			dgvGpx.DataSource = _dtGpxList;
 		}
 		private void btnBrowse_Click(object sender, EventArgs e)
 		{
