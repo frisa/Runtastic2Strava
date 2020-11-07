@@ -56,6 +56,19 @@ namespace Runtastic2Strava
         public string sport_type_id { get; set; }
         public string[] user_equipment_ids { get; set; }
     }
+    public class ImageMetaData
+    {
+        public DateTime created_at { get; set; }
+        public float latitude { get; set; }
+        public float longitude { get; set; }
+        public int id { get; set; }
+    }
+    public class ImageSessionAlbum
+    {
+        public string id { get; set; }
+        public string sample_id { get; set; }
+        public int[] photos_ids { get; set; }
+    }
     public static class CStravaImporter
 	{
         public static StravaToken RenewToken()

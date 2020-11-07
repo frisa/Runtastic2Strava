@@ -35,14 +35,10 @@
 			this.tbPath = new System.Windows.Forms.TextBox();
 			this.btnBrowse = new System.Windows.Forms.Button();
 			this.dgvImport = new System.Windows.Forms.DataGridView();
-			this.btnImport = new System.Windows.Forms.Button();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.btnGpxImport = new System.Windows.Forms.Button();
-			this.dgvGpx = new System.Windows.Forms.DataGridView();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvImport)).BeginInit();
 			this.tableLayoutPanel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvGpx)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// btnLoad
@@ -53,7 +49,7 @@
 			this.btnLoad.Name = "btnLoad";
 			this.btnLoad.Size = new System.Drawing.Size(76, 22);
 			this.btnLoad.TabIndex = 0;
-			this.btnLoad.Text = "Load";
+			this.btnLoad.Text = "Import";
 			this.btnLoad.UseVisualStyleBackColor = true;
 			this.btnLoad.Click += new System.EventHandler(this.btnLoad_Click);
 			// 
@@ -75,7 +71,7 @@
 			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 1;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
 			this.tableLayoutPanel1.Size = new System.Drawing.Size(943, 26);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
@@ -116,6 +112,7 @@
 			this.dgvImport.AllowUserToAddRows = false;
 			this.dgvImport.AllowUserToDeleteRows = false;
 			this.dgvImport.ColumnHeadersHeight = 34;
+			this.tableLayoutPanel2.SetColumnSpan(this.dgvImport, 2);
 			this.dgvImport.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.dgvImport.Location = new System.Drawing.Point(2, 32);
 			this.dgvImport.Margin = new System.Windows.Forms.Padding(2);
@@ -125,20 +122,8 @@
 			this.dgvImport.RowHeadersWidth = 62;
 			this.dgvImport.RowTemplate.Height = 28;
 			this.dgvImport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvImport.Size = new System.Drawing.Size(469, 528);
+			this.dgvImport.Size = new System.Drawing.Size(943, 558);
 			this.dgvImport.TabIndex = 4;
-			// 
-			// btnImport
-			// 
-			this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnImport.Location = new System.Drawing.Point(2, 564);
-			this.btnImport.Margin = new System.Windows.Forms.Padding(2);
-			this.btnImport.Name = "btnImport";
-			this.btnImport.Size = new System.Drawing.Size(469, 26);
-			this.btnImport.TabIndex = 5;
-			this.btnImport.Text = "Import Activities";
-			this.btnImport.UseVisualStyleBackColor = true;
-			this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
 			// 
 			// tableLayoutPanel2
 			// 
@@ -146,46 +131,16 @@
 			this.tableLayoutPanel2.ColumnCount = 2;
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-			this.tableLayoutPanel2.Controls.Add(this.btnImport, 0, 2);
 			this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel1, 0, 0);
-			this.tableLayoutPanel2.Controls.Add(this.btnGpxImport, 1, 2);
 			this.tableLayoutPanel2.Controls.Add(this.dgvImport, 0, 1);
-			this.tableLayoutPanel2.Controls.Add(this.dgvGpx, 1, 1);
 			this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
 			this.tableLayoutPanel2.Name = "tableLayoutPanel2";
-			this.tableLayoutPanel2.RowCount = 3;
+			this.tableLayoutPanel2.RowCount = 2;
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(947, 592);
 			this.tableLayoutPanel2.TabIndex = 2;
-			// 
-			// btnGpxImport
-			// 
-			this.btnGpxImport.Cursor = System.Windows.Forms.Cursors.Default;
-			this.btnGpxImport.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnGpxImport.Location = new System.Drawing.Point(476, 565);
-			this.btnGpxImport.Name = "btnGpxImport";
-			this.btnGpxImport.Size = new System.Drawing.Size(468, 24);
-			this.btnGpxImport.TabIndex = 6;
-			this.btnGpxImport.Text = "Import GPX";
-			this.btnGpxImport.UseVisualStyleBackColor = true;
-			this.btnGpxImport.Click += new System.EventHandler(this.btnGpxImport_Click);
-			// 
-			// dgvGpx
-			// 
-			this.dgvGpx.AllowUserToAddRows = false;
-			this.dgvGpx.AllowUserToDeleteRows = false;
-			this.dgvGpx.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dgvGpx.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvGpx.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvGpx.Location = new System.Drawing.Point(476, 33);
-			this.dgvGpx.Name = "dgvGpx";
-			this.dgvGpx.ReadOnly = true;
-			this.dgvGpx.RowHeadersVisible = false;
-			this.dgvGpx.Size = new System.Drawing.Size(468, 526);
-			this.dgvGpx.TabIndex = 7;
 			// 
 			// MainForm
 			// 
@@ -202,7 +157,6 @@
 			this.tableLayoutPanel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvImport)).EndInit();
 			this.tableLayoutPanel2.ResumeLayout(false);
-			((System.ComponentModel.ISupportInitialize)(this.dgvGpx)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -215,9 +169,6 @@
 		private System.Windows.Forms.TextBox tbPath;
 		private System.Windows.Forms.Button btnBrowse;
 		private System.Windows.Forms.DataGridView dgvImport;
-		private System.Windows.Forms.Button btnImport;
 		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-		private System.Windows.Forms.Button btnGpxImport;
-		private System.Windows.Forms.DataGridView dgvGpx;
 	}
 }
