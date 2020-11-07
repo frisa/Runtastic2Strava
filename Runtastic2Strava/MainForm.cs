@@ -76,9 +76,7 @@ namespace Runtastic2Strava
 						if (resultUpload.ActivityId != null)
 						{
 							var apiActivity = new ActivitiesApi();
-							var body = new UpdatableActivity();
-							resultActivity = apiActivity.UpdateActivityById(resultUpload.ActivityId, body);
-							//resultActivity = apiActivity.GetActivityById(resultUpload.ActivityId, true);
+							resultActivity = apiActivity.UpdateActivityById(resultUpload.ActivityId, null);
 						}
 					}
 					catch (Exception except)                                    
@@ -118,6 +116,7 @@ namespace Runtastic2Strava
 							String photoFile = Path.ChangeExtension(photoId.ToString(), "jpg");
 							if (File.Exists(Path.Combine(sPathPhotos, photoFile)))
 							{
+								//resultActivity.Photos
 								MessageBox.Show("");
 							}
 						}
