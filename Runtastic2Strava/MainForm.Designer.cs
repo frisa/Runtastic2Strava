@@ -42,9 +42,10 @@
 			// btnLoad
 			// 
 			this.btnLoad.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnLoad.Location = new System.Drawing.Point(1083, 3);
+			this.btnLoad.Location = new System.Drawing.Point(722, 2);
+			this.btnLoad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.btnLoad.Name = "btnLoad";
-			this.btnLoad.Size = new System.Drawing.Size(114, 32);
+			this.btnLoad.Size = new System.Drawing.Size(76, 21);
 			this.btnLoad.TabIndex = 0;
 			this.btnLoad.Text = "Load";
 			this.btnLoad.UseVisualStyleBackColor = true;
@@ -53,11 +54,11 @@
 			// tableLayoutPanel1
 			// 
 			this.tableLayoutPanel1.ColumnCount = 5;
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 179F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 119F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 80F));
 			this.tableLayoutPanel1.Controls.Add(this.btnLoad, 3, 0);
 			this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.tbPath, 1, 0);
@@ -66,37 +67,41 @@
 			this.tableLayoutPanel1.Controls.Add(this.btnImport, 4, 0);
 			this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+			this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
 			this.tableLayoutPanel1.RowCount = 2;
-			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 38F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
 			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-			this.tableLayoutPanel1.Size = new System.Drawing.Size(1320, 946);
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(880, 615);
 			this.tableLayoutPanel1.TabIndex = 1;
 			// 
 			// label1
 			// 
 			this.label1.AutoSize = true;
-			this.label1.Location = new System.Drawing.Point(3, 0);
+			this.label1.Location = new System.Drawing.Point(2, 0);
+			this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(164, 20);
+			this.label1.Size = new System.Drawing.Size(110, 13);
 			this.label1.TabIndex = 1;
 			this.label1.Text = "Runtastic Export Path";
 			// 
 			// tbPath
 			// 
 			this.tbPath.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tbPath.Location = new System.Drawing.Point(182, 3);
+			this.tbPath.Location = new System.Drawing.Point(121, 2);
+			this.tbPath.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.tbPath.Name = "tbPath";
-			this.tbPath.Size = new System.Drawing.Size(775, 26);
+			this.tbPath.Size = new System.Drawing.Size(517, 20);
 			this.tbPath.TabIndex = 2;
 			this.tbPath.Text = "d:\\Repositories\\export-20201030-000\\";
 			// 
 			// btnBrowse
 			// 
 			this.btnBrowse.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnBrowse.Location = new System.Drawing.Point(963, 3);
+			this.btnBrowse.Location = new System.Drawing.Point(642, 2);
+			this.btnBrowse.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.btnBrowse.Name = "btnBrowse";
-			this.btnBrowse.Size = new System.Drawing.Size(114, 32);
+			this.btnBrowse.Size = new System.Drawing.Size(76, 21);
 			this.btnBrowse.TabIndex = 3;
 			this.btnBrowse.Text = "Browse";
 			this.btnBrowse.UseVisualStyleBackColor = true;
@@ -108,22 +113,24 @@
 			this.dgvImport.ColumnHeadersHeight = 34;
 			this.tableLayoutPanel1.SetColumnSpan(this.dgvImport, 4);
 			this.dgvImport.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.dgvImport.Location = new System.Drawing.Point(3, 41);
+			this.dgvImport.Location = new System.Drawing.Point(2, 27);
+			this.dgvImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.dgvImport.Name = "dgvImport";
 			this.dgvImport.ReadOnly = true;
 			this.dgvImport.RowHeadersVisible = false;
 			this.dgvImport.RowHeadersWidth = 62;
 			this.dgvImport.RowTemplate.Height = 28;
 			this.dgvImport.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-			this.dgvImport.Size = new System.Drawing.Size(1194, 902);
+			this.dgvImport.Size = new System.Drawing.Size(796, 586);
 			this.dgvImport.TabIndex = 4;
 			// 
 			// btnImport
 			// 
 			this.btnImport.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.btnImport.Location = new System.Drawing.Point(1203, 3);
+			this.btnImport.Location = new System.Drawing.Point(802, 2);
+			this.btnImport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.btnImport.Name = "btnImport";
-			this.btnImport.Size = new System.Drawing.Size(114, 32);
+			this.btnImport.Size = new System.Drawing.Size(76, 21);
 			this.btnImport.TabIndex = 5;
 			this.btnImport.Text = "Import";
 			this.btnImport.UseVisualStyleBackColor = true;
@@ -131,10 +138,11 @@
 			// 
 			// MainForm
 			// 
-			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(1320, 946);
+			this.ClientSize = new System.Drawing.Size(880, 615);
 			this.Controls.Add(this.tableLayoutPanel1);
+			this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "MainForm";
