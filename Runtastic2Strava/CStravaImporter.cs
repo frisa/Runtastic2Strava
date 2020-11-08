@@ -71,13 +71,13 @@ namespace Runtastic2Strava
     }
     public static class CStravaImporter
 	{
-        public static StravaToken RenewToken()
+        public static StravaToken RenewToken(string clientId, string clientSecret, string refreshToken)
         {
             Dictionary<string, string> values = new Dictionary<string, string>();
             values.Add("grant_type", "refresh_token");
-            values.Add("client_id", "55818");
-            values.Add("client_secret", "f7517d6028515a37d54eb5a22f2d1a252d93097c");
-            values.Add("refresh_token", "77ca157ea781429f7a56585d40d6d092228cf6e4");
+            values.Add("client_id", clientId);
+            values.Add("client_secret", clientSecret);
+            values.Add("refresh_token", refreshToken);
             Configuration.DefaultApiClient.RestClient.BaseUrl = "https://www.strava.com/oauth";
             RestSharp.RestResponse result = Configuration.DefaultApiClient.CallApi("token", RestSharp.Method.POST, values,
                 "grant_type=refresh_token&client_id=55818&client_secret=f7517d6028515a37d54eb5a22f2d1a252d93097c&refresh_token=ed9d3d6c85b3806a03bfb75e5b9bc41ee6edddfb",

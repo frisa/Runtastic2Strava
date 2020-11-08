@@ -41,7 +41,7 @@ namespace Runtastic2Strava
 		}
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
-			_token = CStravaImporter.RenewToken();
+			_token = CStravaImporter.RenewToken(tbClient.Text, tbClientSecret.Text, tbRefreshToken.Text);
 			if (Configuration.ApiKey.ContainsKey("access_token"))
 			{
 				Configuration.ApiKey.Remove("access_token");
@@ -83,7 +83,7 @@ namespace Runtastic2Strava
 						int timeOut = 0;
 						do
 						{
-							System.Threading.Thread.Sleep(500);
+							System.Threading.Thread.Sleep(2000);
 							resultUpload = apiUpload.GetUploadById(resultUpload.Id);
 							System.Windows.Forms.Application.DoEvents();
 							if (30 < timeOut++)
