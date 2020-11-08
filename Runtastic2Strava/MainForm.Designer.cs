@@ -36,14 +36,14 @@
 			this.btnBrowse = new System.Windows.Forms.Button();
 			this.dgvImport = new System.Windows.Forms.DataGridView();
 			this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-			this.rtbLog = new System.Windows.Forms.RichTextBox();
 			this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+			this.tbRefreshToken = new System.Windows.Forms.TextBox();
+			this.tbClientSecret = new System.Windows.Forms.TextBox();
+			this.rtbLog = new System.Windows.Forms.RichTextBox();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label3 = new System.Windows.Forms.Label();
 			this.label4 = new System.Windows.Forms.Label();
 			this.tbClient = new System.Windows.Forms.TextBox();
-			this.tbClientSecret = new System.Windows.Forms.TextBox();
-			this.tbRefreshToken = new System.Windows.Forms.TextBox();
 			this.tableLayoutPanel1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvImport)).BeginInit();
 			this.tableLayoutPanel2.SuspendLayout();
@@ -148,16 +148,6 @@
 			this.tableLayoutPanel2.Size = new System.Drawing.Size(1880, 1364);
 			this.tableLayoutPanel2.TabIndex = 2;
 			// 
-			// rtbLog
-			// 
-			this.tableLayoutPanel3.SetColumnSpan(this.rtbLog, 2);
-			this.rtbLog.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.rtbLog.Location = new System.Drawing.Point(3, 123);
-			this.rtbLog.Name = "rtbLog";
-			this.rtbLog.Size = new System.Drawing.Size(740, 1232);
-			this.rtbLog.TabIndex = 5;
-			this.rtbLog.Text = "";
-			// 
 			// tableLayoutPanel3
 			// 
 			this.tableLayoutPanel3.ColumnCount = 2;
@@ -181,6 +171,34 @@
 			this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
 			this.tableLayoutPanel3.Size = new System.Drawing.Size(746, 1358);
 			this.tableLayoutPanel3.TabIndex = 6;
+			// 
+			// tbRefreshToken
+			// 
+			this.tbRefreshToken.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tbRefreshToken.Location = new System.Drawing.Point(153, 83);
+			this.tbRefreshToken.Name = "tbRefreshToken";
+			this.tbRefreshToken.Size = new System.Drawing.Size(590, 26);
+			this.tbRefreshToken.TabIndex = 11;
+			this.tbRefreshToken.Text = "77ca157ea781429f7a56585d40d6d092228cf6e4";
+			// 
+			// tbClientSecret
+			// 
+			this.tbClientSecret.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tbClientSecret.Location = new System.Drawing.Point(153, 43);
+			this.tbClientSecret.Name = "tbClientSecret";
+			this.tbClientSecret.Size = new System.Drawing.Size(590, 26);
+			this.tbClientSecret.TabIndex = 10;
+			this.tbClientSecret.Text = "f7517d6028515a37d54eb5a22f2d1a252d93097c";
+			// 
+			// rtbLog
+			// 
+			this.tableLayoutPanel3.SetColumnSpan(this.rtbLog, 2);
+			this.rtbLog.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.rtbLog.Location = new System.Drawing.Point(3, 123);
+			this.rtbLog.Name = "rtbLog";
+			this.rtbLog.Size = new System.Drawing.Size(740, 1232);
+			this.rtbLog.TabIndex = 5;
+			this.rtbLog.Text = "";
 			// 
 			// label2
 			// 
@@ -216,25 +234,7 @@
 			this.tbClient.Name = "tbClient";
 			this.tbClient.Size = new System.Drawing.Size(590, 26);
 			this.tbClient.TabIndex = 9;
-			this.tbClient.Text = "55819";
-			// 
-			// tbClientSecret
-			// 
-			this.tbClientSecret.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tbClientSecret.Location = new System.Drawing.Point(153, 43);
-			this.tbClientSecret.Name = "tbClientSecret";
-			this.tbClientSecret.Size = new System.Drawing.Size(590, 26);
-			this.tbClientSecret.TabIndex = 10;
-			this.tbClientSecret.Text = "f7517d6028515a37d54eb5a22f2d1a252d93097d";
-			// 
-			// tbRefreshToken
-			// 
-			this.tbRefreshToken.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.tbRefreshToken.Location = new System.Drawing.Point(153, 83);
-			this.tbRefreshToken.Name = "tbRefreshToken";
-			this.tbRefreshToken.Size = new System.Drawing.Size(590, 26);
-			this.tbRefreshToken.TabIndex = 11;
-			this.tbRefreshToken.Text = "77ca157ea781429f7a56585d40d6d092228cf6e5";
+			this.tbClient.Text = "55818";
 			// 
 			// MainForm
 			// 
@@ -245,7 +245,7 @@
 			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
 			this.Name = "MainForm";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-			this.Text = "MainForm";
+			this.Text = "Runtastic to Strava Migration Tool";
 			this.tableLayoutPanel1.ResumeLayout(false);
 			this.tableLayoutPanel1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvImport)).EndInit();
