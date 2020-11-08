@@ -27,6 +27,12 @@ namespace Runtastic2Strava
 			InitializeComponent();
 			
 		}
+		private logActivity(RuntasticActivity ac, Color color)
+		{
+			_blRuntasticActivities.Add(ac);
+			dgvImport.Refresh();
+			dgvImport.Update();
+		}
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
 			_token = CStravaImporter.RenewToken();
@@ -74,6 +80,7 @@ namespace Runtastic2Strava
 							if (20 < timeOut++) break;
 						}
 						while ((resultUpload.Status.ToString().Contains("Your activity is still being processed.")));
+
 						//if (resultUpload.ActivityId != null)
 						//{
 						//	var apiActivity = new ActivitiesApi();
@@ -112,10 +119,10 @@ namespace Runtastic2Strava
 					}
 				}
 
-				if (resultActivity != null)
-				{
-					String sPhotoSessionAlbum = Path.Combine(sPathSessionAlbums, ac.id);
-					sPhotoSessionAlbum = Path.ChangeExtension(sPhotoSessionAlbum, "json");
+				//if (resultActivity != null)
+				//{
+					//String sPhotoSessionAlbum = Path.Combine(sPathSessionAlbums, ac.id);
+					//sPhotoSessionAlbum = Path.ChangeExtension(sPhotoSessionAlbum, "json");
 					//if (File.Exists(sPhotoSessionAlbum))
 					//{
 					//	ImageSessionAlbum imageSessionAlbum = Newtonsoft.Json.JsonConvert.DeserializeObject<ImageSessionAlbum>(System.IO.File.ReadAllText(sPhotoSessionAlbum));
@@ -139,8 +146,8 @@ namespace Runtastic2Strava
 					//		}
 					//	}
 					//}
-				}
-				_blRuntasticActivities.Add(ac);
+				//}
+
 			}
 		}
 		private void btnBrowse_Click(object sender, EventArgs e)
