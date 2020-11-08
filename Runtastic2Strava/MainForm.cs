@@ -27,11 +27,17 @@ namespace Runtastic2Strava
 			InitializeComponent();
 			
 		}
-		private logActivity(RuntasticActivity ac, Color color)
+		private void logActivity(RuntasticActivity ac, Color color)
 		{
 			_blRuntasticActivities.Add(ac);
+			dgvImport.Rows[dgvImport.Rows.Count - 1].DefaultCellStyle.BackColor = color;
 			dgvImport.Refresh();
 			dgvImport.Update();
+		}
+		private void log(String message)
+		{
+			rtbLog.Text = rtbLog.Text + message + System.Environment.NewLine;
+			rtbLog.Refresh();
 		}
 		private void btnLoad_Click(object sender, EventArgs e)
 		{
@@ -47,6 +53,7 @@ namespace Runtastic2Strava
 				Configuration.ApiKey.Remove("refresh_token");
 			}
 			Configuration.ApiKey.Add("refresh_token", _token.refresh_token);
+			log("Tokens Loaded");
 
 			_blRuntasticActivities = new BindingList<RuntasticActivity>();
 			dgvImport.DataSource = _blRuntasticActivities;
@@ -64,6 +71,7 @@ namespace Runtastic2Strava
 				String sPhotoFile = Path.ChangeExtension(sSessionFile, "json");
 				RuntasticActivity ac = Newtonsoft.Json.JsonConvert.DeserializeObject<RuntasticActivity>(System.IO.File.ReadAllText(sSessionFilePath), new EpochDateTimeConverter());
 				DetailedActivity resultActivity = null;
+				index++;
 				if (File.Exists(sGpsFile))
 				{
 					try
@@ -77,26 +85,30 @@ namespace Runtastic2Strava
 						{
 							System.Threading.Thread.Sleep(500);
 							resultUpload = apiUpload.GetUploadById(resultUpload.Id);
-							if (20 < timeOut++) break;
+							System.Windows.Forms.Application.DoEvents();
+							if (30 < timeOut++)
+							{
+								MessageBox.Show("Timeout");
+								break;
+							}
 						}
 						while ((resultUpload.Status.ToString().Contains("Your activity is still being processed.")));
-
-						//if (resultUpload.ActivityId != null)
-						//{
-						//	var apiActivity = new ActivitiesApi();
-						//	var updatableActivity = new UpdatableActivity();
-						//	updatableActivity.Name = "ABC";
-						//	updatableActivity.Description = "Popisek";
-						//	updatableActivity.Commute = false;
-						//	updatableActivity.Trainer = false;
-						//	updatableActivity.Type = new ActivityType();
-						//	updatableActivity.GearId = "none";
-						//	resultActivity = apiActivity.UpdateActivityById(resultUpload.ActivityId, updatableActivity);
-						//}
+						if ((resultUpload.Status.ToString().Contains("Your activity is ready.")))
+						{
+							logActivity(ac, Color.Green);
+							log(index.ToString() + " -> " + resultUpload.ActivityId + " uploaded form:" + Path.GetFileName(file.Name));
+						}
+						else
+						{
+							logActivity(ac, Color.Red);
+							log(index.ToString() + " -> " + resultUpload.Status.ToString() + " " + Path.GetFileName(file.Name));
+						}
+						System.Windows.Forms.Application.DoEvents();
 					}
 					catch (Exception except)                                    
 					{
-						MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						log(except.Message);
+						logActivity(ac, Color.Red);
 					}
 				}             
 				else
@@ -104,7 +116,7 @@ namespace Runtastic2Strava
 					try
 					{
 						ActivitiesApi apiActivities = new ActivitiesApi();
-						var name = "Activity " + index++;
+						var name = "Activity " + index;
 						var type = "Run";
 						var startDateLocal = ac.created_at.ToString("yyyy-MM-dd-THH:mm:ssZ");
 						var elapsedTime = (int)(ac.duration / 1000);
@@ -112,42 +124,15 @@ namespace Runtastic2Strava
 						var photoIds = "";
 						resultActivity = apiActivities.CreateActivity(name, type, startDateLocal, elapsedTime,
 							null, distance, null, photoIds, null);
+						logActivity(ac, Color.Green);
+						log(index.ToString() + " -> " + resultActivity.Name + " done manualy");
 					}
 					catch (Exception except)
 					{
-						MessageBox.Show(except.Message, "Strava Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+						log(index.ToString() + " -> " + except.Message);
+						logActivity(ac, Color.Red);
 					}
 				}
-
-				//if (resultActivity != null)
-				//{
-					//String sPhotoSessionAlbum = Path.Combine(sPathSessionAlbums, ac.id);
-					//sPhotoSessionAlbum = Path.ChangeExtension(sPhotoSessionAlbum, "json");
-					//if (File.Exists(sPhotoSessionAlbum))
-					//{
-					//	ImageSessionAlbum imageSessionAlbum = Newtonsoft.Json.JsonConvert.DeserializeObject<ImageSessionAlbum>(System.IO.File.ReadAllText(sPhotoSessionAlbum));
-					//	foreach (int photoId in imageSessionAlbum.photos_ids)
-					//	{
-					//		String photoFile = Path.ChangeExtension(photoId.ToString(), "jpg");
-					//		if (File.Exists(Path.Combine(sPathPhotos, photoFile)))
-					//		{
-					//			resultActivity.Photos.Count = 1;
-
-					//			var urls = new Dictionary<string, string>();
-					//			urls.Add("600", "https://dgtzuqphqg23d.cloudfront.net/yi7K8SvhYm2gpcssESRHyqB2oThbUQ5rv8CKz2Pr9yc-121x128.jpg");
-					//			resultActivity.Photos.Primary = new PhotosSummaryPrimary();
-					//			resultActivity.Photos.Primary.Id = 1;
-					//			resultActivity.Photos.Primary.Source = 1;
-					//			resultActivity.Photos.Primary.UniqueId = "1";
-					//			resultActivity.Photos.Primary.Urls = urls;
-					//			resultActivity.Description = "Moje upravena activita";
-								
-					//			//MessageBox.Show("");
-					//		}
-					//	}
-					//}
-				//}
-
 			}
 		}
 		private void btnBrowse_Click(object sender, EventArgs e)
