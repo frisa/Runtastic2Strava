@@ -107,7 +107,7 @@ namespace Runtastic2Strava
 					}
 					catch (Exception except)                                    
 					{
-						log(except.Message);
+						log(index.ToString() + " -> " + except.Message);
 						logActivity(ac, Color.Red);
 					}
 				}             
